@@ -5,8 +5,9 @@ Wordpress Linked Articles Plugin
 
 Please check /documentation/index.html for details.
 
-==Examples==
-`
+Examples 
+
+
     // donor type
 			class charitas_DonorTypeFilter extends dashboardExtraFilters_TaxonomyFilter {
 				public $post_types = array('post_donors');
@@ -22,4 +23,4 @@ Please check /documentation/index.html for details.
 				public $meta_key = 'wpl_donor_company_name';
 			}
 			new charitas_DonorCompanyFilter();
-`
+
