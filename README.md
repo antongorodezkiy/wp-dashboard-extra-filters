@@ -1,4 +1,6 @@
 wp-dashboard-extra-filters
-==========================
+==================
 
-Wordpress Plugin for extra filters in the Admin Dashboard
+Wordpress Linked Articles Plugin
+
+Please check /documentation/index.html for details.
