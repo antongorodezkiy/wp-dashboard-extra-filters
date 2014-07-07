@@ -47,6 +47,11 @@ function wp_dashboard_extra_filters_init() {
 		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/MetaFilter.php');
 	}
 
+	if (!class_exists('dashboardExtraFilters_RelatedPostMetaFilter')) {
+		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/RelatedPostMetaFilter.php');
+	}
+	
+	
 	if (!class_exists('dashboardExtraFilters_TaxonomyFilter')) {
 		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/TaxonomyFilter.php');
 	}

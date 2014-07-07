@@ -54,20 +54,22 @@ class dashboardExtraFilters_TaxonomyFilter {
 		public function apply_filters( $query ) {
 			global $pagenow, $typenow;
 			
-			$qv = &$query->query_vars;
-	
-			if ('edit.php' == $pagenow && get_query_var($this->taxonomy)) {
-				
-				if (!isset($qv['tax_query'])) {
-					$qv['tax_query'] = array();
+			if ( $query->is_main_query() ) {
+				$qv = &$query->query_vars;
+		
+				if ('edit.php' == $pagenow && get_query_var($this->taxonomy)) {
+					
+					if (!isset($qv['tax_query'])) {
+						$qv['tax_query'] = array();
+					}
+					
+					$qv['tax_query'][] = array(
+						'taxonomy' => $this->taxonomy,
+						'field' => 'slug',
+						'terms' => get_query_var($this->taxonomy),
+						'operator' => 'IN',
+					);
 				}
-				
-				$qv['tax_query'][] = array(
-					'taxonomy' => $this->taxonomy,
-					'field' => 'slug',
-					'terms' => get_query_var($this->taxonomy),
-					'operator' => 'IN',
-				);
 			}
 		}
 	

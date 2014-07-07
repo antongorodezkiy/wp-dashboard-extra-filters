@@ -1,10 +1,11 @@
 <?php if (!defined('WPINC')) die();
 
-class dashboardExtraFilters_MetaFilter {
+class dashboardExtraFilters_RelatedPostMetaFilter {
 	
 	public $post_types = array();
 	public $empty_label = null;
 	public $meta_key = null;
+	public $related_post_type = null;
 	
 	public function __construct() {
 		if (!$this->empty_label) {
@@ -32,20 +33,27 @@ class dashboardExtraFilters_MetaFilter {
 								
 				// filtering 
 					$meta_values = dashboardExtraFiltersModel::getDistinctMetaValues($this->post_types, $this->meta_key);
-					
+					//echo('<pre>'.(__FILE__).':'.(__LINE__).'<hr />'.print_r($meta_values,true).'</pre>');
+					$posts_query = new WP_Query(array(
+						'post_status' => array('publish', 'draft', 'pending'),
+						'post_type' => $this->related_post_type,
+						'post__in' => $meta_values,
+						'posts_per_page' => -1
+					));
+					//die('<pre>'.(__FILE__).':'.(__LINE__).'<hr />'.print_r($posts_query->request,true).'</pre>');
 				?>
 					<select class="js-dashboard-extra-filters" name="<?php echo $this->meta_key; ?>">
 						<option value="0"><?php echo $this->empty_label; ?></option>
 						<?php
-						
-							foreach($meta_values as $meta_value) {
+							
+							foreach($posts_query->get_posts() as $post) {
 								$if_selected = '';
-								if (get_query_var($this->meta_key) == $meta_value) {
+								if (get_query_var($this->meta_key) == $post->ID) {
 									$if_selected = 'selected="selected"';
 								}
 						
 								?>
-									<option <?php echo $if_selected; ?> value="<?php echo $meta_value;?>"><?php echo $meta_value;?></option>
+									<option <?php echo $if_selected; ?> value="<?php echo $post->ID;?>"><?php echo $post->post_title;?></option>
 								<?php
 							}
 						?>
