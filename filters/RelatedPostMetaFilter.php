@@ -33,16 +33,16 @@ class dashboardExtraFilters_RelatedPostMetaFilter {
 								
 				// filtering 
 					$meta_values = dashboardExtraFiltersModel::getDistinctMetaValues($this->post_types, $this->meta_key);
-					//echo('<pre>'.(__FILE__).':'.(__LINE__).'<hr />'.print_r($meta_values,true).'</pre>');
+					
 					$posts_query = new WP_Query(array(
 						'post_status' => array('publish', 'draft', 'pending'),
 						'post_type' => $this->related_post_type,
 						'post__in' => $meta_values,
 						'posts_per_page' => -1
 					));
-					//die('<pre>'.(__FILE__).':'.(__LINE__).'<hr />'.print_r($posts_query->request,true).'</pre>');
+					
 				?>
-					<select class="js-dashboard-extra-filters" name="<?php echo $this->meta_key; ?>">
+					<select class="js-dashboard-extra-filters-dropdown dashboard-extra-filters-dropdown" name="<?php echo $this->meta_key; ?>">
 						<option value="0"><?php echo $this->empty_label; ?></option>
 						<?php
 							

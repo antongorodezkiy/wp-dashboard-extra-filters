@@ -30,7 +30,7 @@ class dashboardExtraFilters_TaxonomyFilter {
 					
 					$terms = get_terms($this->taxonomy, array('hide_empty' => true));
 				?>
-					<select class="js-dashboard-extra-filters" name="<?php echo $this->taxonomy; ?>">
+					<select class="js-dashboard-extra-filters-dropdown dashboard-extra-filters-dropdown" name="<?php echo $this->taxonomy; ?>">
 						<option value="0"><?php echo $this->empty_label; ?></option>
 						<?php
 						

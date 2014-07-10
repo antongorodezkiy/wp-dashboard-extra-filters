@@ -34,7 +34,7 @@ class dashboardExtraFilters_MetaFilter {
 					$meta_values = dashboardExtraFiltersModel::getDistinctMetaValues($this->post_types, $this->meta_key);
 					
 				?>
-					<select class="js-dashboard-extra-filters" name="<?php echo $this->meta_key; ?>">
+					<select class="js-dashboard-extra-filters-dropdown dashboard-extra-filters-dropdown" name="<?php echo $this->meta_key; ?>">
 						<option value="0"><?php echo $this->empty_label; ?></option>
 						<?php
 						

@@ -51,6 +51,9 @@ function wp_dashboard_extra_filters_init() {
 		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/RelatedPostMetaFilter.php');
 	}
 	
+	if (!class_exists('dashboardExtraFilters_PostDateFilter')) {
+		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/PostDateFilter.php');
+	}
 	
 	if (!class_exists('dashboardExtraFilters_TaxonomyFilter')) {
 		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/TaxonomyFilter.php');

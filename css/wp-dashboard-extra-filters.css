@@ -220,6 +220,17 @@
 
 
 
+
+
+
 #posts-filter .tablenav .actions {
-  overflow: visible;
+	overflow: visible;
+}
+
+#posts-filter .dashboard-extra-filters-datepair {
+	display: inline-block;
+}
+
+#posts-filter .dashboard-extra-filters-datepair .hidden {
+	display: none;
 }
