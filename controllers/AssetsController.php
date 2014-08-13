@@ -41,25 +41,20 @@ class dashboardExtraFiltersAssetsController {
 				array('jquery')
 			);
 			wp_enqueue_script(
-				'datepair',
-				plugins_url('js/datepair.js', DASHBOARD_EXTRA_FILTERS_FILE),
-				array('jquery')
-			);
-			wp_enqueue_script(
 				'jquery.datepair',
 				plugins_url('js/jquery.datepair.js', DASHBOARD_EXTRA_FILTERS_FILE),
-				array('jquery', 'datepair')
+				array('jquery')
 			);
 			wp_enqueue_script(
 				'wp-dashboard-extra-filters',
 				plugins_url('js/wp-dashboard-extra-filters.js', DASHBOARD_EXTRA_FILTERS_FILE),
 				array(
 					'jquery',
+					'jquery-ui-datepicker',
 					'moment',
 					'jquery.select2',
 					'jquery.pikaday',
 					'jquery.timepicker',
-					'datepair',
 					'jquery.datepair'
 				)
 			);

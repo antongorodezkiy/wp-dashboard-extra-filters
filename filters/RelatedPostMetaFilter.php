@@ -1,29 +1,9 @@
 <?php if (!defined('WPINC')) die();
 
-class dashboardExtraFilters_RelatedPostMetaFilter {
+class dashboardExtraFilters_RelatedPostMetaFilter extends dashboardExtraFilters_Filter {
 	
-	public $post_types = array();
-	public $empty_label = null;
-	public $meta_key = null;
 	public $related_post_type = null;
-	
-	public function __construct() {
-		if (!$this->empty_label) {
-			$this->empty_label = __('Show All',DASHBOARD_EXTRA_FILTERS_PLUGIN);
-		}
-		
-		add_filter('query_vars', array(&$this,'add_query_vars_filter'));
-		add_action('restrict_manage_posts', array(&$this,'show_filters'));
-		add_action('parse_query', array(&$this,'apply_filters'));
-		
-		
-	}
-	
-	// add query var
-		public function add_query_vars_filter($vars) {
-			$vars[] = $this->meta_key;
-			return $vars;
-		}
+	public $empty_value = '-1';
 	
 	// show filters
 		public function show_filters() {
@@ -34,31 +14,39 @@ class dashboardExtraFilters_RelatedPostMetaFilter {
 				// filtering 
 					$meta_values = dashboardExtraFiltersModel::getDistinctMetaValues($this->post_types, $this->meta_key);
 					
-					$posts_query = new WP_Query(array(
-						'post_status' => array('publish', 'draft', 'pending'),
-						'post_type' => $this->related_post_type,
-						'post__in' => $meta_values,
-						'posts_per_page' => -1
-					));
+					if ($meta_values) {
+						$posts_query = new WP_Query(array(
+							'post_type' => $this->related_post_type,
+							'post__in' => $meta_values,
+							'posts_per_page' => -1
+						));
 					
-				?>
-					<select class="js-dashboard-extra-filters-dropdown dashboard-extra-filters-dropdown" name="<?php echo $this->meta_key; ?>">
-						<option value="0"><?php echo $this->empty_label; ?></option>
-						<?php
-							
-							foreach($posts_query->get_posts() as $post) {
-								$if_selected = '';
-								if (get_query_var($this->meta_key) == $post->ID) {
-									$if_selected = 'selected="selected"';
-								}
-						
-								?>
-									<option <?php echo $if_selected; ?> value="<?php echo $post->ID;?>"><?php echo $post->post_title;?></option>
-								<?php
-							}
+						$found_posts = $posts_query->get_posts();
+					}
+					else {
+						$found_posts = array();
+					}
+					
+					if (($this->hide_if_empty && !empty($found_posts)) || !$this->hide_if_empty) {
 						?>
-					</select>
-				<?php
+							<select class="js-dashboard-extra-filters-dropdown dashboard-extra-filters-dropdown" name="<?php echo $this->meta_key; ?>">
+								<option value="<?php echo $this->empty_value;?>"><?php echo $this->empty_label; ?></option>
+								<?php
+									
+									foreach($found_posts as $found_post) {
+										$if_selected = '';
+										if ($this->get_query_var($this->meta_key) == $found_post->ID) {
+											$if_selected = 'selected="selected"';
+										}
+								
+										?>
+											<option <?php echo $if_selected; ?> value="<?php echo $found_post->ID;?>"><?php echo $found_post->post_title;?></option>
+										<?php
+									}
+								?>
+							</select>
+						<?php
+					}
 			}
 		}
 	
@@ -66,21 +54,24 @@ class dashboardExtraFilters_RelatedPostMetaFilter {
 		public function apply_filters( $query ) {
 			global $pagenow, $typenow;
 			
-			if ( $query->is_main_query() ) {
+			$action = (isset($_GET['action']) ? $_GET['action'] : null);
+			if ( $query->is_admin && $query->is_main_query() || $action != '-1' /* this is needed to show filters always - && $query->query['post_type'] == $typenow*/) {
 				$qv = &$query->query_vars;
 		
-				if ('edit.php' == $pagenow && get_query_var($this->meta_key)) {
+				if ($pagenow == 'edit.php' && $this->get_query_var($this->meta_key)) {
 					
 					if (!isset($qv['meta_query'])) {
 						$qv['meta_query'] = array();
 					}
 					
-					$qv['meta_query'][] = array(
-						'field' => $this->meta_key,
-						'value' => get_query_var($this->meta_key),
-						'compare' => '=',
-						'type' => ''
-					);
+					if ($this->get_query_var($this->meta_key) != $this->empty_value) {
+						$qv['meta_query'][] = array(
+							'key' => $this->meta_key,
+							'value' => $this->get_query_var($this->meta_key),
+							'compare' => '=',
+							'type' => ''
+						);
+					}
 				}
 			}
 		}

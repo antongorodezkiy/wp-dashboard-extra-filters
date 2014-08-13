@@ -43,6 +43,10 @@ function wp_dashboard_extra_filters_init() {
 		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/controllers/AdminController.php');
 	}
 	
+	if (!class_exists('dashboardExtraFilters_Filter')) {
+		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/Filter.php');
+	}
+	
 	if (!class_exists('dashboardExtraFilters_MetaFilter')) {
 		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/MetaFilter.php');
 	}
@@ -57,6 +61,10 @@ function wp_dashboard_extra_filters_init() {
 	
 	if (!class_exists('dashboardExtraFilters_TaxonomyFilter')) {
 		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/TaxonomyFilter.php');
+	}
+	
+	if (!class_exists('dashboardExtraFilters_ArrayFilter')) {
+		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/ArrayFilter.php');
 	}
 	
 	// assets
