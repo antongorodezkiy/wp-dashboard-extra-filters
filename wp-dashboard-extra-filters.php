@@ -67,6 +67,11 @@ function wp_dashboard_extra_filters_init() {
 		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/ArrayFilter.php');
 	}
 	
+	if (!class_exists('dashboardExtraFilters_P2POneToManyFilter')) {
+		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/P2POneToManyFilter.php');
+	}
+	
+	
 	// assets
 		if (is_admin()) {
 			add_action('admin_head', array('dashboardExtraFiltersAssetsController', 'admin_head'));
