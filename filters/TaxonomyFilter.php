@@ -61,7 +61,7 @@ class dashboardExtraFilters_TaxonomyFilter extends dashboardExtraFilters_Filter 
 						$qv['tax_query'] = array();
 					}
 					
-					if ($this->get_query_var($this->meta_key) != $this->empty_value) {
+					if ($this->get_query_var($this->taxonomy) != $this->empty_value) {
 						$qv['tax_query'][] = array(
 							'taxonomy' => $this->taxonomy,
 							'field' => 'slug',
