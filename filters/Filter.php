@@ -14,7 +14,7 @@ abstract class dashboardExtraFilters_Filter {
 		}
 		
 		add_action('restrict_manage_posts', array(&$this,'show_filters'));
-		add_action('parse_query', array(&$this,'apply_filters'));	
+		add_action('parse_query', array(&$this,'apply_filters'));
 	}
 	
 	// get query var

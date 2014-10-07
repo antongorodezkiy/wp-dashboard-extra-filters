@@ -135,7 +135,7 @@ class dashboardExtraFilters_PostDateFilter extends dashboardExtraFilters_Filter 
 			global $pagenow, $typenow;
 			
 			$action = (isset($_GET['action']) ? $_GET['action'] : null);
-			if ( $query->is_admin && $query->is_main_query() || $action != '-1' ) {
+			if ( $query->is_admin && $query->is_main_query() ) {
 				$qv = &$query->query_vars;
 				
 				$date_start = $this->get_query_var($this->date_start_key);

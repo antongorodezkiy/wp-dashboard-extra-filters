@@ -56,8 +56,7 @@ class dashboardExtraFilters_P2POneToManyFilter extends dashboardExtraFilters_Fil
 			$action = (isset($_GET['action']) ? $_GET['action'] : null);
 			if (
 				in_array($typenow, $this->post_types)
-				&& $query->is_admin && $query->is_main_query()
-				|| ($action && $action != '-1') /* this is needed to show filters always - && $query->query['post_type'] == $typenow*/
+				&& $query->is_admin && $query->is_main_query() /* this is needed to show filters always - && $query->query['post_type'] == $typenow*/
 			) {
 				
 				$qv = &$query->query_vars;
