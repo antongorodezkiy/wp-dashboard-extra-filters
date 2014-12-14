@@ -53,7 +53,7 @@ class dashboardExtraFilters_MetaFilter extends dashboardExtraFilters_Filter {
 			global $pagenow, $typenow;
 			
 			$action = (isset($_GET['action']) ? $_GET['action'] : null);
-			if ( $query->is_admin && $query->is_main_query() ) {
+			if ($query->is_admin && $query->is_main_query() && in_array($typenow,$this->post_types)) {
 				$qv = &$query->query_vars;
 		
 				if ($pagenow == 'edit.php' && $this->get_query_var($this->meta_key)) {

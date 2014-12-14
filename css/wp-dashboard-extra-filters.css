@@ -231,7 +231,8 @@
 	overflow: visible;
 }
 
-#posts-filter .dashboard-extra-filters-datepair {
+#posts-filter .dashboard-extra-filters-datepair,
+#posts-filter .dashboard-extra-filters-valuepair {
 	display: inline-block;
 }
 
@@ -239,14 +240,20 @@
 	display: none;
 }
 
-.dashboard-extra-filters-datepair input,
-.dashboard-extra-filters-datepair input:focus {
+#posts-filter .dashboard-extra-filters-valuepair input,
+#posts-filter .dashboard-extra-filters-valuepair input:focus,
+#posts-filter .dashboard-extra-filters-datepair input,
+#posts-filter .dashboard-extra-filters-datepair input:focus {
 	border: none;
 	background: none;
 	box-shadow: none;
 }
 
-.dashboard-extra-filters-range-input-pair {
+#posts-filter .dashboard-extra-filters-valuepair input {
+	width: 100px;
+}
+
+#posts-filter .dashboard-extra-filters-range-input-pair {
     display: inline-block;
     height: 26px;
     padding: 0 0 0 8px;
@@ -258,6 +265,7 @@
     line-height: 26px;
     color: #444;
     text-decoration: none;
+	vertical-align: middle;
 
     border-radius: 4px;
 
@@ -288,8 +296,12 @@
 	margin: 0px;
 }
 
-.dashboard-extra-filters-datepair-predefined.select2-container .select2-choice {
+#posts-filter .dashboard-extra-filters-datepair-predefined.select2-container .select2-choice {
 	box-shadow: none;
 	border: none;
 	border-left: 1px solid #aaa;
+}
+
+#posts-filter .dashboard-extra-filters-datepair-predefined {
+	height: 29px;
 }

@@ -53,69 +53,73 @@ class dashboardExtraFilters_PostDateFilter extends dashboardExtraFilters_Filter 
 				
 				$date_start = $this->get_query_var($this->date_start_key);
 				$date_end = $this->get_query_var($this->date_end_key);
-				?>
-
-					<div class="js-dashboard-extra-filters-datepair dashboard-extra-filters-range-input-pair dashboard-extra-filters-datepair">
+				
+				$predefined = array(
+					__('Predefined', DASHBOARD_EXTRA_FILTERS_PLUGIN) => array(
+						'value' => '',
+						'date_start' => '',
+						'date_end' => ''
+					),
+					__('Today', DASHBOARD_EXTRA_FILTERS_PLUGIN) => array(
+						'value' => 'today',
+						'date_start' => date('Y-m-d',strtotime('today midnight')),
+						'date_end' => date('Y-m-d')
+					),
+					__('This week', DASHBOARD_EXTRA_FILTERS_PLUGIN) => array(
+						'value' => 'this_week',
+						'date_start' => date('Y-m-d',strtotime('this week midnight')),
+						'date_end' => date('Y-m-d')
+					),
+					__('This month', DASHBOARD_EXTRA_FILTERS_PLUGIN) => array(
+						'value' => 'this_month',
+						'date_start' => date('Y-m-d',strtotime('midnight first day of this month')),
+						'date_end' => date('Y-m-d')
+					),
+					__('This year', DASHBOARD_EXTRA_FILTERS_PLUGIN) => array(
+						'value' => 'this_year',
+						'date_start' => date('Y-m-d',strtotime('first day of January '.date('Y'))),
+						'date_end' => date('Y-m-d')
+					),
+					__('Past year', DASHBOARD_EXTRA_FILTERS_PLUGIN) => array(
+						'value' => 'past_year',
+						'date_start' => date('Y-m-d',strtotime('first day of January previous year')),
+						'date_end' => date('Y-m-d',strtotime('first day of January this year'))
+					)
+				);
+				
+		
+				
+				?><div class="js-dashboard-extra-filters-datepair dashboard-extra-filters-range-input-pair dashboard-extra-filters-datepair">
 						<input
 							type="text"
 							name="<?php echo $this->date_start_key;?>"
 							value="<?php echo $date_start;?>"
 							class="date start"
 							placeholder="<?php echo $this->empty_label['date_start'];?>"
-							/>
-						<input
+							/><!--
+						--><input
 							type="text"
 							name="<?php echo $this->time_start_key;?>"
 							value="<?php echo $this->get_query_var($this->time_start_key);?>"
 							class="time start <?php echo (!$this->time_start_key ? "hidden" : "");?>"
 							placeholder="<?php echo $this->empty_label['time_start'];?>"
-							/>
-						<span class="separator">|</span>
-						<input
+							/><!--
+						--><span class="separator">|</span><!--
+						--><input
 							type="text"
 							name="<?php echo $this->date_end_key;?>"
 							value="<?php echo $date_end;?>"
 							class="date end"
 							placeholder="<?php echo $this->empty_label['date_end'];?>"
-							/>
-						<input
+							/><!--
+						--><input
 							type="text"
 							name="<?php echo $this->time_end_key;?>"
 							value="<?php echo $this->get_query_var($this->time_end_key);?>"
 							class="time end <?php echo (!$this->time_end_key ? "hidden" : "");?>"
 							placeholder="<?php echo $this->empty_label['time_end'];?>"
-							/>
-							
-						<?php
-							$predefined = array(
-								__('Predefined', DASHBOARD_EXTRA_FILTERS_PLUGIN) => array(
-									'value' => '',
-									'date_start' => '',
-									'date_end' => ''
-								),
-								__('Today', DASHBOARD_EXTRA_FILTERS_PLUGIN) => array(
-									'value' => 'today',
-									'date_start' => date('Y-m-d',strtotime('today midnight')),
-									'date_end' => date('Y-m-d')
-								),
-								__('This week', DASHBOARD_EXTRA_FILTERS_PLUGIN) => array(
-									'value' => 'this_week',
-									'date_start' => date('Y-m-d',strtotime('this week midnight')),
-									'date_end' => date('Y-m-d')
-								),
-								__('This month', DASHBOARD_EXTRA_FILTERS_PLUGIN) => array(
-									'value' => 'this_month',
-									'date_start' => date('Y-m-d',strtotime('midnight first day of this month')),
-									'date_end' => date('Y-m-d')
-								),
-								__('This year', DASHBOARD_EXTRA_FILTERS_PLUGIN) => array(
-									'value' => 'this_year',
-									'date_start' => date('Y-m-d',strtotime('first day of January '.date('Y'))),
-									'date_end' => date('Y-m-d')
-								)
-							);
-						?>						
-						<select class="js-dashboard-extra-filters-dropdown js-dashboard-extra-filters-datepair-predefined dashboard-extra-filters-datepair-predefined">
+							/><!--
+						--><select class="js-dashboard-extra-filters-dropdown js-dashboard-extra-filters-datepair-predefined dashboard-extra-filters-datepair-predefined">
 							<?php foreach($predefined as $label => $meta) { ?>
 								<option
 									value="<?php echo $meta['value'];?>"
@@ -125,8 +129,7 @@ class dashboardExtraFilters_PostDateFilter extends dashboardExtraFilters_Filter 
 										<?php echo $label;?></option>
 							<?php } ?>
 						</select>
-					</div>
-				<?php
+					</div><?php
 			}
 		}
 	

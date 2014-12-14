@@ -50,6 +50,10 @@ function wp_dashboard_extra_filters_init() {
 	if (!class_exists('dashboardExtraFilters_MetaFilter')) {
 		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/MetaFilter.php');
 	}
+	
+	if (!class_exists('dashboardExtraFilters_BetweenMetaFilter')) {
+		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/BetweenMetaFilter.php');
+	}
 
 	if (!class_exists('dashboardExtraFilters_RelatedPostMetaFilter')) {
 		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/RelatedPostMetaFilter.php');
@@ -69,6 +73,10 @@ function wp_dashboard_extra_filters_init() {
 	
 	if (!class_exists('dashboardExtraFilters_P2POneToManyFilter')) {
 		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/P2POneToManyFilter.php');
+	}
+	
+	if (!class_exists('dashboardExtraFilters_MetaOfRelatedPostFilter')) {
+		include_once(DASHBOARD_EXTRA_FILTERS_APPPATH.'/filters/MetaOfRelatedPostFilter.php');
 	}
 	
 	
