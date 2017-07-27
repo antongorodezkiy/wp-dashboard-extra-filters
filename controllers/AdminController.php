@@ -5,6 +5,15 @@ class dashboardExtraFiltersAdminController {
 	// settings
 		public static function registerMenuPage() {
 			//add_options_page('Dashboard Extra Filters', 'Dashboard Extra Filters', 'manage_options', DASHBOARD_EXTRA_FILTERS_PLUGIN, array('dashboardExtraFiltersAdminController','showSettings'));
+			
+			/*function admin_footer_debug_query() {
+				global $wp_query;
+				
+				echo '
+				<!-- $wp_query '.print_r($wp_query,true).' -->
+				';
+			}
+			add_action("admin_footer", "admin_footer_debug_query");*/
 		}
 	
 		public static function showSettings() {
